@@ -1,23 +1,37 @@
 import React from "react";
 import { StyleSheet, View, Text, Button, Platform,FlatList } from 'react-native';
 import { CATEGORIES,MEALS } from '../data/dummy-data';
+import MealItem from "../Components/MealItem";
 
 const CategoryMeal = (props) => {
 
     const catID = props.navigation.getParam('categoryId');
-    console.log(catID)
     const selectedcategory = CATEGORIES.find(cat => cat.id === catID);
    
     const displayMeals = MEALS.filter(meal=>meal.categoryId.indexOf(catID)>=0 )
     
+
     const renderMeal=(itemData)=>{
         return (
-
-            <View>
-                <Text>{itemData.item.title}</Text>
-            </View>
+           <MealItem
+            title={itemData.item.title}
+            Image={itemData.item.imageUrl}
+            duration={itemData.item.duration}
+            complexity={itemData.item.complexity}
+            affordability={itemData.item.affordability}
+            onSelectMeal={()=>{
+                props.navigation.navigate({
+                    routeName:'MealDetails',
+                
+                params:{
+                    mealId:itemData.item.id
+                }})
+            }}
+            />
+            
         );
     }
+
 
     return (
         <View style={styles.MainScrren}>
@@ -37,9 +51,8 @@ const CategoryMeal = (props) => {
             keyExtractor={(item,index)=>item.id }
             data={displayMeals}
             renderItem={renderMeal}
+            style={{width:"100%",padding:10}}
             />
-
-
 
         </View>);
 }

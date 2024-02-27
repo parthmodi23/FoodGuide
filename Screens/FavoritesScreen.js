@@ -7,18 +7,16 @@ const FavoritesScreen=()=>{
     return(
         <View style={styles.MainScrren}> 
         <Text>
-this is fav
+        this is fav
         </Text>
-        
     </View>
     );
- 
-}
-
-
+    }
 const styles=StyleSheet.create({
 MainScrren:{
     flex:1,
+    justifyContent:'center',
+    alignItems:'center'
 }
 })
 export default FavoritesScreen;
