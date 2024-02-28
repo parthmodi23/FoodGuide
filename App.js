@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import {useFonts} from 'expo-font';
 import MealNavigator from './navigation/MealNavigator';
 import React from 'react';
 import AppLoading from 'expo-app-loading'
 import { enableScreens } from 'react-native-screens';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import 'react-native-gesture-handler';
 export default function App() {
   enableScreens()
 
@@ -16,9 +18,9 @@ export default function App() {
   if(!fontLoaded){
     return <AppLoading/>
   }
-  
-  return <MealNavigator/>
-  
+  return <SafeAreaProvider>
+  <MealNavigator/>
+      </SafeAreaProvider>
     
 }
 

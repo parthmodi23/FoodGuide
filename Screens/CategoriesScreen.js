@@ -17,7 +17,7 @@ const CategoriesScreen = (props) => {
                         categoryId: itemData.item.id 
                     }
                 });
-            }
+            } 
                 
             }/>
             );
@@ -33,12 +33,6 @@ const CategoriesScreen = (props) => {
                 numColumns={2}
                 renderItem={rendercategories}
             />
-            {/* <Text style={{color:'blue'}}>
-            this is what ypou want dsvdsfgverrgsvcrs
-        </Text>
-        <Button title="go to meal" onPress={()=>{
-            props.navigation.push('Categorymeal')
-        }}/> */}
 
         </View>);
 }
@@ -48,7 +42,6 @@ const CategoriesScreen = (props) => {
 const styles = StyleSheet.create({
     mainscreen: {
         flex: 1,
-
     },
     mainbox: {
         flex: 1,
@@ -60,3 +53,11 @@ const styles = StyleSheet.create({
     }
 })
 export default CategoriesScreen;
+
+//this for return part
+        {/* <Text style={{color:'blue'}}>
+        this is what ypou want dsvdsfgverrgsvcrs
+    </Text>
+    <Button title="go to meal" onPress={()=>{
+        props.navigation.push('Categorymeal')
+    }}/> */}
