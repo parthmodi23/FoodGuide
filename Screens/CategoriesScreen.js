@@ -3,6 +3,8 @@ import React from "react";
 import { StyleSheet, View, Text, Button, FlatList, Dimensions, Platform, TouchableOpacity } from 'react-native'
 import { CATEGORIES } from '../data/dummy-data';
 import CategoryGridTile from "../Components/CategoryGridTile";
+import { CommonActions } from '@react-navigation/native';
+
 const CategoriesScreen = (props) => {
 
     const rendercategories = (itemData) => {
@@ -11,12 +13,14 @@ const CategoriesScreen = (props) => {
             title={itemData.item.title}
             color={itemData.item.color}
             onSelect={()=>{
-                props.navigation.navigate({
-                    routeName: 'Categorymeal',
-                    params: { 
-                        categoryId: itemData.item.id 
-                    }
-                });
+                props.navigation.dispatch(
+                    CommonActions.navigate({
+                        name:'Categorymeal',
+                        params:{
+                            categoryId: itemData.item.id 
+                        }
+                    })
+                );
             } 
                 
             }/>

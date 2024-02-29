@@ -4,9 +4,11 @@ import { StyleSheet, View,Text } from 'react-native'
 import { MEALS } from "../data/dummy-data";
 import {HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../Components/HeaderButton";
+import { useRoute } from "@react-navigation/native";
 const MealDetailsScreen=(props)=>{
-    const MealId=props.navigation.getParam('mealId')
 
+    const route =useRoute()
+    const MealId=route.params?.mealId;
     const selectedMeal = MEALS.find(meal=>meal.id==MealId)
     return(
     <View style={styles.mainscreen}>
@@ -18,9 +20,9 @@ const MealDetailsScreen=(props)=>{
 
 MealDetailsScreen.navigationOptions=(navigationData)=>{
 
-    const mealId=navigationData.navigation.getParam('mealId')
-    const selectedMeals = MEALS.find(meal=>meal.id==mealId)
-
+    const route=useRoute()
+    const MealId=route.params?.mealId;
+    const selectedMeals = MEALS.find(meal=>meal.id==MealId)
     const title=selectedMeals.title
     // console.log(selectedMeals)
     return{

@@ -2,6 +2,7 @@ import React from "react";
 
 import { FlatList,View,Text,StyleSheet } from "react-native";
 import MealItem from "./MealItem";
+import { CommonActions } from "@react-navigation/native";
 
 const MealList = (props)=>{
 
@@ -15,12 +16,15 @@ const MealList = (props)=>{
             complexity={itemData.item.complexity}
             affordability={itemData.item.affordability}
             onSelectMeal={()=>{
-                props.navigation.navigate({
-                    routeName:'MealDetails',
-                params:{
-                    mealId:itemData.item.id
-                 }
-            })
+                props.navigation.dispatch(
+
+                CommonActions.navigate({
+                   name :'MealDetails',
+                    params:{
+                        mealId:itemData.item.id
+                     }
+                })
+                )
             }}
             />
             

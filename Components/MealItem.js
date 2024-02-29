@@ -37,10 +37,12 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 200,
         width: '100%',
-        backgroundColor: '',
+        backgroundColor: '#ffff',
         marginVertical:10,
         // borderWidth:1,
         // borderColor:'black'
+        overflow: "hidden",
+        borderRadius:20
 
     },
     mealRow: {
@@ -54,7 +56,6 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         justifyContent:'flex-end',
-        borderRadius:10,
         overflow:'hidden',
         elevation:50,
     },

@@ -1,34 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
-import {useFonts} from 'expo-font';
-import MealNavigator from './navigation/MealNavigator';
+// App.js
+
 import React from 'react';
-import AppLoading from 'expo-app-loading'
-import { enableScreens } from 'react-native-screens';
+import { StatusBar } from 'expo-status-bar';
+import { useFonts } from 'expo-font';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import 'react-native-gesture-handler';
-export default function App() {
-  enableScreens()
+import AppLoading from 'expo-app-loading';
+import { enableScreens } from 'react-native-screens';
+import { NavigationContainer } from '@react-navigation/native';
+import DrawerNavigator from './navigation/MealNavigator'; // Adjust the import to match your navigation file
+import MealNavigator from './navigation/MealNavigator';
+import FavoriteNavigator from './navigation/MealNavigator';
+import MainNavigator from './navigation/MealNavigator';
+import App1 from './navigation/MealNavigator';
 
-  let [fontLoaded] =useFonts({ 
-    'open-sans':require('./assets/fonts/OpenSans-Regular.ttf'),
+export default function App() {
+  enableScreens();
+
+  let [fontLoaded] = useFonts({ 
+    'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
     'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'), 
   });
 
-  if(!fontLoaded){
-    return <AppLoading/>
+  if (!fontLoaded) {
+    return <AppLoading />;
   }
-  return <SafeAreaProvider>
-  <MealNavigator/>
-      </SafeAreaProvider>
-    
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  return (
+    <SafeAreaProvider>
+      <NavigationContainer>     
+         <DrawerNavigator/>
+         </NavigationContainer>
+
+      <StatusBar style="auto" />
+    </SafeAreaProvider>
+  );
+}

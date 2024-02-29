@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useDebugValue, useEffect } from "react";
 import { StyleSheet, View, Text, Button, Platform,FlatList } from 'react-native';
 import { CATEGORIES,MEALS } from '../data/dummy-data';
 import category from "../Models/category";
 import MealList from "../Components/MealList";
+import { useRoute } from '@react-navigation/native';
+
 
 const CategoryMeal = (props) => {
-
-
-    const catID = props.navigation.getParam('categoryId');
+    const route = useRoute();
+    const catID = route.params?.categoryId
+    console.log(catID);
     const selectedcategory = CATEGORIES.find(cat => cat.id === catID);
     
     const displayMeals = MEALS.filter(meal=>meal.categoryId.indexOf(catID)>=0 )
@@ -17,14 +19,19 @@ const CategoryMeal = (props) => {
        );
 }
 
-CategoryMeal.navigationOptions=(navigation1)=> {
-    const catID = navigation1.navigation.getParam('categoryId');
-    const selectedcategory = CATEGORIES.find(category => category.id === catID);
+        CategoryMeal.navigationOptions=(navigation1)=> {
+            const route =useRoute()
+            const catId = route.params?.categoryId;
+            console.log("fed"+catId)
+            const selectedcategory = CATEGORIES.find(category => category.id === catId);
 
-     const title=selectedcategory.title
-return{
-    headerTitle:title
-}
+            const title=selectedcategory.title
+            
+            useEffect(()=>{
+                if(title){
+                    
+                }
+            })
 
 };
 
