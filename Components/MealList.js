@@ -16,15 +16,13 @@ const MealList = (props)=>{
             complexity={itemData.item.complexity}
             affordability={itemData.item.affordability}
             onSelectMeal={()=>{
-                props.navigation.dispatch(
-
-                CommonActions.navigate({
+                props.navigation.navigate({
                    name :'MealDetails',
                     params:{
                         mealId:itemData.item.id
                      }
                 })
-                )
+                
             }}
             />
             
@@ -36,7 +34,7 @@ const MealList = (props)=>{
         keyExtractor={(item,index)=>item.id }
         data={props.listData} 
         renderItem={renderMeal}
-        style={{width:"100%",padding:5}}
+        style={{width:"100%",padding:7}}
         />
     </View>
     );

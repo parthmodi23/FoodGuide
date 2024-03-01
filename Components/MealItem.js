@@ -1,6 +1,8 @@
 import react from "react";
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import fonts from "../constant/fonts";
+import DefaultText from "./DefaultText";
 
 const MealItem = (props) => {
 
@@ -14,14 +16,14 @@ const MealItem = (props) => {
                         <ImageBackground
                          source={{ uri: props.Image }} 
                          style={styles.bgImage}>
-                        <View style={styles.titlecontainer}><Text numberOfLines={1} style={styles.title}>{props.title}</Text></View>
+                        <View style={styles.titlecontainer}><Text numberOfLines={1} style={{...styles.title,...styles.fontstyle}}>{props.title}</Text></View>
                         </ImageBackground>
                     </View>
 
                     <View style={{ ...styles.mealRow, ...styles.mealdetails }}>
-                        <Text>{props.duration}m</Text>
-                        <Text>{props.complexity}</Text>
-                        <Text>{props.affordability}</Text>
+                        <DefaultText>{props.duration}m</DefaultText>
+                        <DefaultText>{props.complexity}</DefaultText>
+                        <DefaultText>{props.affordability}</DefaultText>
                     </View>
                 </View>
 
@@ -66,20 +68,23 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 10,
         alignItems:'center',
-        height: '15%'
+        height: '15%',
+        fontFamily:fonts.fontFamily
      },
     titlecontainer:{
         backgroundColor: 'rgba(0,0,0,0.5)',
         paddingHorizontal: 5,
         paddingVertical:12,
     },
-    title: {
-        fontFamily: 'open-sans-bold',
+   
+    fontstyle:{
+        fontFamily:fonts.fontFamily,
+        fontSize:15
+    }, title: {
         color: '#ffff',
-      
         fontSize:15,
         textAlign:'center'
-    }
+    },
 
 })
 

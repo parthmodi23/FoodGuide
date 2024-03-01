@@ -1,5 +1,3 @@
-// MealNavigator.js
-
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -13,19 +11,29 @@ import FilterScreen from "../Screens/FilterScreen";
 import { Platform } from "react-native";
 import Color from "../constant/Color";
 import { Ionicons } from "@expo/vector-icons";
-
+import fonts from '../constant/fonts';
+import {Text} from 'react-native'
 const Stack = createStackNavigator();
+const MaterialTab = createMaterialBottomTabNavigator();
+const Drawer = createDrawerNavigator();
+
 
 const defaultStackNavigation = {
+  
   headerStyle: {
     backgroundColor: 'darkgreen',
   },
+  headerTitleStyle:{
+    fontFamily:fonts.fontFamily,
+  },
   headerTintColor: Platform.OS === 'android' ? 'white' : 'blue',
+
 };
 
 const MealNavigator = () => (
+
   <Stack.Navigator screenOptions={defaultStackNavigation}>
-    <Stack.Screen name='Categories' component={CategoriesScreen} options={{ title: 'Meal Category' }} />
+    <Stack.Screen name='Categories' component={CategoriesScreen}  />
     <Stack.Screen name='Categorymeal' component={CategoryMeal} />
     <Stack.Screen name='MealDetails' component={MealDetailsScreen} />
   </Stack.Navigator>
@@ -38,46 +46,50 @@ const FavoriteNavigator = () => (
   </Stack.Navigator>
 );
 
-const MaterialTab = createMaterialBottomTabNavigator();
 
-const BottomTabNavigator = () => (
+
+const BottomMaterialTabNavigator = () => (
   <MaterialTab.Navigator
     shifting={true}
-    activeColor={Color.primary} // Color for the active tab
-    inactiveColor={Color.danger}
+    activeColor={Color.red}
+    inactiveColor={Color.info}
   >
     <MaterialTab.Screen
       name='Meals'
       component={MealNavigator}
       options={{
+        tabBarLabel:Platform.OS==='android'?<Text style={{fontFamily:fonts.fontFamily}}>Meals</Text>:'Meals',
         tabBarIcon: (tabInfo) => <Ionicons name="fast-food-outline" size={25} />,
       }}
     />
     <MaterialTab.Screen
-      name='Favorites'
+      name='Favorites category'
       component={FavoriteNavigator}
       options={{
-        tabBarLabel: 'Favorites!',
-        tabBarIcon: (tabInfo) => <Ionicons name="star" size={25} />,
+        tabBarLabel:Platform.OS==='android'?<Text style={{fontFamily:fonts.fontFamily}}>Favorites</Text>:'Favorites',
+        tabBarIcon: (tabInfo) => <Ionicons name="star-outline" size={25} />,
       }}
     />
   </MaterialTab.Navigator>
 );
 
-const Drawer = createDrawerNavigator();
+const FilterNavigator = () => (
+  <Stack.Navigator screenOptions={{headerStyle:{backgroundColor: 'darkgreen'}}}>
+    <Stack.Screen name='FilterScreen' component={FilterScreen} />
+  </Stack.Navigator>
+)
+
 
 const DrawerNavigator = () => {
-  return(
-  <Drawer.Navigator>
-    <Drawer.Screen name="MealScreen" component={BottomTabNavigator}  />
-    <Drawer.Screen name='Filter' component={FilterScreen}   />
-  </Drawer.Navigator>);
+  return (
+    <NavigationContainer >
+      <Drawer.Navigator screenOptions={{defaultStackNavigation}}>
+        <Drawer.Screen name="MainScreen" component={BottomMaterialTabNavigator} options={{headerShown:false,title:'Meal'}}/>
+        <Drawer.Screen name='Filter' component={FilterNavigator} options={{headerShown:false}} />
+      </Drawer.Navigator>
+    </NavigationContainer>);
 }
 
-// const App1 = () => (
-//   <NavigationContainer>
-//     <DrawerNavigator />
-//   </NavigationContainer>
-// );
+
 
 export default DrawerNavigator;

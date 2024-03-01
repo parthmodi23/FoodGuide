@@ -9,4 +9,5 @@ export default {
     dark: 'rgb(36, 36, 36)',
     bordercolor:'black',
     white: '#ffffff',
+    red:'red',
 }

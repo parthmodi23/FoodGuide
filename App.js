@@ -20,6 +20,7 @@ export default function App() {
   let [fontLoaded] = useFonts({ 
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
     'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'), 
+    'DancingScript-VariableFont_wght': require("./assets/fonts/DancingScript-VariableFont_wght.ttf") 
   });
 
   if (!fontLoaded) {
@@ -28,9 +29,7 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <NavigationContainer>     
-         <DrawerNavigator/>
-         </NavigationContainer>
+         <MealNavigator/>
 
       <StatusBar style="auto" />
     </SafeAreaProvider>

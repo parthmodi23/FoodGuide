@@ -15,7 +15,7 @@ const FavoritesScreen=(props)=>{
     }
 
 FavoritesScreen.navigtionOptions={
-    headerTitle:'your Favroties'
+    headerTitle:'your Favrotie'
 };
 
 const styles=StyleSheet.create({

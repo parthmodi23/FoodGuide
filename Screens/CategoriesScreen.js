@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { StyleSheet, View, Text, Button, FlatList, Dimensions, Platform, TouchableOpacity } from 'react-native'
 import { CATEGORIES } from '../data/dummy-data';
 import CategoryGridTile from "../Components/CategoryGridTile";
-import { CommonActions } from '@react-navigation/native';
+import {HeaderButtons, Item } from "react-navigation-header-buttons";
+import CustomHeaderButton from "../Components/HeaderButton";
 
 const CategoriesScreen = (props) => {
 
@@ -13,20 +14,42 @@ const CategoriesScreen = (props) => {
             title={itemData.item.title}
             color={itemData.item.color}
             onSelect={()=>{
-                props.navigation.dispatch(
-                    CommonActions.navigate({
+                props.navigation.navigate({
                         name:'Categorymeal',
                         params:{
                             categoryId: itemData.item.id 
                         }
                     })
-                );
+                
             } 
                 
             }/>
             );
          
     }
+ 
+    useEffect(() => {
+        props.navigation.setOptions({
+          title: 'Category',
+          headerLeft:()=><HeaderButtons
+            HeaderButtonComponent={CustomHeaderButton}>
+                <Item title='Menue'
+                iconName='menu'
+                onPress={
+                    ()=>{
+                        props.navigation.toggleDrawer()
+                    }
+                }
+/>
+</HeaderButtons>
+
+          
+        
+          
+        });
+      }, 
+    );
+    
     return (
 
         <View style={styles.mainscreen}>
