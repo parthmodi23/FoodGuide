@@ -34,7 +34,7 @@ const FilterScreen=(props)=>{
         vegetarian:isvegetarian
     };
 
-console.log(appliedfilter);
+console.log(JSON.stringify(appliedfilter));
     },[isGluten,isLactos,isvegan,isvegetarian]);
     
     useEffect(() => {
@@ -52,7 +52,9 @@ console.log(appliedfilter);
             HeaderButtonComponent={CustomHeaderButton}>
                 <Item title='save'
                 iconName='save-outline'
-                onPress={props.route.params.save}
+                onPress={()=>{
+                    props.route.params?.save?.();
+                }} 
                 />
              </HeaderButtons>,
         headerLeft:()=><HeaderButtons

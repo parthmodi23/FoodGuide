@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { StyleSheet, View, Text, Button, FlatList, Dimensions, Platform, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, Button, FlatList, Dimensions } from 'react-native'
 import { CATEGORIES } from '../data/dummy-data';
 import CategoryGridTile from "../Components/CategoryGridTile";
 import {HeaderButtons, Item } from "react-navigation-header-buttons";

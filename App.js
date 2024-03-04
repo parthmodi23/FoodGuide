@@ -13,9 +13,17 @@ import MealNavigator from './navigation/MealNavigator';
 import FavoriteNavigator from './navigation/MealNavigator';
 import MainNavigator from './navigation/MealNavigator';
 import App1 from './navigation/MealNavigator';
+import { Provider } from 'react-redux';
+import { configureStore,combineReducers, createStore } from 'redux';
+import mealReducer from './store/Reducer/reducer';
+enableScreens();
 
+const rootReducer=combineReducers({
+  meals:mealReducer, 
+});
+
+const store=createStore(rootReducer)
 export default function App() {
-  enableScreens();
 
   let [fontLoaded] = useFonts({ 
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
@@ -29,8 +37,9 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
+      <Provider store={store}>
          <MealNavigator/>
-
+      </Provider>
       <StatusBar style="auto" />
     </SafeAreaProvider>
   );

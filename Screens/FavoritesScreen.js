@@ -1,22 +1,21 @@
 import React from "react";
 import { StyleSheet, View,Text } from 'react-native'
-import { MEALS } from "../data/dummy-data";
 import MealList from "../Components/MealList";
+import {useSelector } from "react-redux";
+const FavoritesScreen=props=>{
 
-const FavoritesScreen=(props)=>{
 
-    const favdata=MEALS.filter(catid=>catid.id==='m1' || catid.id==='m2')
-
+    const favoriteData=useSelector(state=>state.meals.favoriteMeals);
+    // console.log(alldata)
+    // const favdata=MEALS.filter(catid=>catid.id==='m1')
+    // console.log(favdata)
     return(
     <View style={styles.MainScrren}> 
-<MealList listData={favdata} navigation={props.navigation}/>
+<MealList listData={favoriteData} navigation={props.navigation}/>
     </View>
     );
-    }
+ }
 
-FavoritesScreen.navigtionOptions={
-    headerTitle:'your Favrotie'
-};
 
 const styles=StyleSheet.create({
 MainScrren:{
@@ -25,4 +24,6 @@ MainScrren:{
     alignItems:'center'
 }
 })
+
+
 export default FavoritesScreen;
