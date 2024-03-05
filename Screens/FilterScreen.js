@@ -5,16 +5,19 @@ import DefaultText from "../Components/DefaultText";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../Components/HeaderButton";
+import { useDispatch } from "react-redux";
+import { setfilterData } from "../store/Actions/mealsActions";
 
 
 const FilterSwitch=(props)=>(
     <TouchableOpacity >
-    <View style={styles.filtercontent}>
+        <View style={styles.filtercontent}>
         <DefaultText>{props.name}</DefaultText>
         <Switch 
         value={props.state} 
         onValueChange={props.onChange}/>
-        </View></TouchableOpacity>
+        </View>
+    </TouchableOpacity>
 )
 
 
@@ -23,7 +26,7 @@ const FilterScreen=(props)=>{
     const [isLactos,SeIisLactos]=useState(false)
     const [isvegan,SetISVegan]=useState(false)
     const [isvegetarian,SetIsVegetarian]=useState(false)
-
+    const dispatch=useDispatch()
     const {navigation} =props
 
     const filterlist=useCallback(()=>{
@@ -34,8 +37,10 @@ const FilterScreen=(props)=>{
         vegetarian:isvegetarian
     };
 
+    dispatch(setfilterData(appliedfilter))
+
 console.log(JSON.stringify(appliedfilter));
-    },[isGluten,isLactos,isvegan,isvegetarian]);
+    },[isGluten,isLactos,isvegan,isvegetarian,dispatch]);
     
     useEffect(() => {
        navigation.setParams({save : filterlist});
@@ -54,6 +59,7 @@ console.log(JSON.stringify(appliedfilter));
                 iconName='save-outline'
                 onPress={()=>{
                     props.route.params?.save?.();
+                    props.navigation.goBack()
                 }} 
                 />
              </HeaderButtons>,
@@ -80,15 +86,11 @@ console.log(JSON.stringify(appliedfilter));
         <Text style={styles.title}>
         Available Filters/Restrictions
         </Text>
-        <FilterSwitch  name='Gluten-Free' state={isGluten}  onChange={newvalue=>SetIsGluten(newvalue)}/>
-        <FilterSwitch name='Lactos-Free' state={isLactos}  onChange={newvalue=>SeIisLactos(newvalue)}/>
-        <FilterSwitch name='Vegan' state={isvegan}  onChange={newvalue=>SetISVegan(newvalue)}/>
-        <FilterSwitch name='Vegetarian' state={isvegetarian}  onChange={newvalue=>SetIsVegetarian(newvalue)}/>
-
-
+            <FilterSwitch name='Gluten-Free' state={isGluten}  onChange={newvalue=>SetIsGluten(newvalue)}/>
+            <FilterSwitch name='Lactos-Free' state={isLactos}  onChange={newvalue=>SeIisLactos(newvalue)}/>
+            <FilterSwitch name='Vegan' state={isvegan}  onChange={newvalue=>SetISVegan(newvalue)}/>
+            <FilterSwitch name='Vegetarian' state={isvegetarian}  onChange={newvalue=>SetIsVegetarian(newvalue)}/>
      </View>
-        
-        
     </View>);
 }
 
@@ -111,8 +113,7 @@ const styles=StyleSheet.create({
         justifyContent:'space-between',
         width:'80%',
         alignItems:'center',
-        marginHorizontal:40
-        
+        marginHorizontal:40,
     }
 })
 

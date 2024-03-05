@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { StyleSheet, View, Text, Image } from 'react-native'
 // import { MEALS } from "../data/dummy-data";
@@ -9,6 +9,7 @@ import DefaultText from "../Components/DefaultText";
 import { useDispatch, useSelector } from "react-redux";
 import CustomHeaderButton from "../Components/HeaderButton";
 import { tooglefav } from "../store/Actions/mealsActions";
+import Toast from 'react-native-toast-message';
 
 const ListView = (props) => (
     <View style={styles.font}>
@@ -18,6 +19,20 @@ const ListView = (props) => (
     </View>
 )
 
+// const Toastmessage=()=>{
+//     const message='Meal has been added to your favourites!'
+//     return(
+//         <Toast  
+//             duration={2000} 
+//             position="bottom"  
+//             opacity= {0.85}
+//             textStyle={{textAlign:'center',alignContent:"center",color:'white'}}
+//             visible={true}
+
+//         ></Toast>
+
+//         )
+// }
 const MealDetailsScreen = (props) => {
 
     const route = useRoute()
@@ -26,12 +41,17 @@ const MealDetailsScreen = (props) => {
     //useselector is basically use for getting the data from 
     //redux store so we cant have to direcly import our data like MEALS
     const Mealdetails = useSelector(state => state.meals.meals)
+
     const selectedMeal = Mealdetails.find(meal => meal.id == MealId)
+    const favoriteicon = useSelector(state=>state.meals.favoriteMeals.some(meal=>meal.id===MealId))
+    
+
     const dispatch = useDispatch()
 
     const tooglehandler = () => {
         dispatch(tooglefav(selectedMeal))
     }
+    
 
     useEffect(() => {
         props.navigation.setOptions({
@@ -39,9 +59,8 @@ const MealDetailsScreen = (props) => {
             headerRight: () => <HeaderButtons
                 HeaderButtonComponent={CustomHeaderButton}>
                 <Item title="Favorite"
-                    iconName='star-outline'
-                    onPress={
-                        tooglehandler} />
+                    iconName={favoriteicon ?'star':'star-outline'}
+                    onPress={tooglehandler} />
             </HeaderButtons>
         });
     },

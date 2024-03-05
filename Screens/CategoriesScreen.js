@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-
+import {Appearance} from 'react-native';
 import { StyleSheet, View, Text, Button, FlatList, Dimensions } from 'react-native'
 import { CATEGORIES } from '../data/dummy-data';
 import CategoryGridTile from "../Components/CategoryGridTile";

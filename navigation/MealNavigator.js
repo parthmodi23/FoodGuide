@@ -82,8 +82,8 @@ const FilterNavigator = () => (
 
 const DrawerNavigator = () => {
   return (
-    <NavigationContainer >
-      <Drawer.Navigator screenOptions={{defaultStackNavigation}}>
+    <NavigationContainer>
+      <Drawer.Navigator screenOptions={{defaultStackNavigation,drawerPosition:'left'}}>
         <Drawer.Screen name="MainScreen" component={BottomMaterialTabNavigator} options={{headerShown:false,title:'Meal'}}/>
         <Drawer.Screen name='Filter' component={FilterNavigator} options={{headerShown:false}} />
       </Drawer.Navigator>

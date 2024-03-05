@@ -1,5 +1,5 @@
 import { MEALS } from "../../data/dummy-data"
-import { ToogleFavoritebutton, tooglefav } from "../Actions/mealsActions"
+import { ToogleFavoritebutton, FilterMeal} from "../Actions/mealsActions"
 
 const initialState={
     meals:MEALS,
@@ -34,6 +34,27 @@ const mealReducer = (state=initialState,action)=>{
             // console.log(addintoFavMeal)
             return {...state,favoriteMeals:addintoFavMeal}
           }  
+
+          case 'FilterMeal':
+            const appliedfilterdata=action.payload.filterData
+            console.log(appliedfilterdata)
+            const updatedfiltermeal=state.meals.filter(meal=>{
+              if(appliedfilterdata.glutenfree && !meal.isGlutenFree){
+                return false;
+              }
+              if(appliedfilterdata.lactosfree && !meal.isLactoseFree){
+                return false;
+              }
+              if(appliedfilterdata.vegenfree && !meal.isVegan){
+                return false;
+              }
+              if(appliedfilterdata.vegetarian && !meal.isVegetarian){
+                return false;
+              }
+              return true;
+            });
+            return {...state,filterMeals:updatedfiltermeal}
+
         default:
             return state
     }
