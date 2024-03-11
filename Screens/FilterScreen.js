@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 
-import { StyleSheet, View,Text,Switch, TouchableOpacity } from 'react-native'
+import { StyleSheet, View,Text,Switch, TouchableOpacity,Button } from 'react-native'
 import DefaultText from "../Components/DefaultText";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
@@ -47,7 +47,11 @@ console.log(JSON.stringify(appliedfilter));
        },[filterlist]
     );
 
-
+const applyfilter=()=>{
+    props.route.params?.save?.();
+    props.navigation.goBack()
+    alert("Filters has been applied")
+}
 
 
     useEffect(() => {
@@ -57,10 +61,7 @@ console.log(JSON.stringify(appliedfilter));
             HeaderButtonComponent={CustomHeaderButton}>
                 <Item title='save'
                 iconName='save-outline'
-                onPress={()=>{
-                    props.route.params?.save?.();
-                    props.navigation.goBack()
-                }} 
+                onPress={applyfilter} 
                 />
              </HeaderButtons>,
         headerLeft:()=><HeaderButtons
@@ -90,6 +91,8 @@ console.log(JSON.stringify(appliedfilter));
             <FilterSwitch name='Lactos-Free' state={isLactos}  onChange={newvalue=>SeIisLactos(newvalue)}/>
             <FilterSwitch name='Vegan' state={isvegan}  onChange={newvalue=>SetISVegan(newvalue)}/>
             <FilterSwitch name='Vegetarian' state={isvegetarian}  onChange={newvalue=>SetIsVegetarian(newvalue)}/>
+            <View style={styles.button}>
+            <Button title='apply filter' onPress={applyfilter}/></View>
      </View>
     </View>);
 }
@@ -114,6 +117,13 @@ const styles=StyleSheet.create({
         width:'80%',
         alignItems:'center',
         marginHorizontal:40,
+    },
+    button:{
+        justifyContent:'center',
+        alignItems:'center',
+        textAlign:'center',
+        marginVertical:10,
+        borderRadius:20,
     }
 })
 

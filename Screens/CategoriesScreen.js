@@ -31,21 +31,25 @@ const CategoriesScreen = (props) => {
     useEffect(() => {
         props.navigation.setOptions({
           title: 'Category',
-          headerLeft:()=><HeaderButtons
-            HeaderButtonComponent={CustomHeaderButton}>
+          headerLeft:()=><HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item title='Menue'
                 iconName='menu'
                 onPress={
                     ()=>{
-                        props.navigation.toggleDrawer()
+                        props.navigation.getParent().openDrawer()                   
                     }
                 }
 />
-</HeaderButtons>
-
-          
-        
-          
+</HeaderButtons>,
+        // headerRight:()=><HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        //     <Item
+        //         title='account'
+        //         iconName="person-outline"
+        //         onPress={()=>{
+        //          props.navigation.getParent('rightscreendrawer').openDrawer()// Open user account drawer
+        //         }}
+        // />
+        // </HeaderButtons>
         });
       }, 
     );

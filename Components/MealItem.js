@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
         height: '100%',
         justifyContent:'flex-end',
         overflow:'hidden',
-        elevation:50,
     },
     mealHeader: {
         height: '85%',

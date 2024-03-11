@@ -1,5 +1,5 @@
 import React, { useDebugValue, useEffect } from "react";
-import { StyleSheet, View, Text, Button, Platform, FlatList } from 'react-native';
+import { StyleSheet, View, Text, Button, Platform, FlatList, Alert } from 'react-native';
 import { CATEGORIES } from '../data/dummy-data';
 import category from "../Models/category";
 import MealList from "../Components/MealList";
@@ -17,9 +17,6 @@ const CategoryMeal = (props) => {
     const selectedcategory = CATEGORIES.find(cat => cat.id === catID);
     const displayMeals = mealdata.filter(meal => meal.categoryId.indexOf(catID) >= 0)
 
-       
-
-        
     useEffect(() => {
         props.navigation.setOptions({
             title: selectedcategory.title

@@ -1,9 +1,7 @@
-// App.js
-
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import 'react-native-gesture-handler';
 import AppLoading from 'expo-app-loading';
 import { enableScreens } from 'react-native-screens';
@@ -33,14 +31,17 @@ export default function App() {
 
   if (!fontLoaded) {
     return <AppLoading />;
-  }
+  } 
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaView style={{ flex: 1 }}>
+      <NavigationContainer>
       <Provider store={store}>
          <MealNavigator/>
       </Provider>
+      </NavigationContainer>
       <StatusBar style="auto" />
-    </SafeAreaProvider>
+
+    </SafeAreaView>
   );
 }
